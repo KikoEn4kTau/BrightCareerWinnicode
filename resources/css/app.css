@@ -10,6 +10,7 @@
 @theme {
     --font-sans:
         'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-inter: 'Inter', sans-serif;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -20,6 +21,12 @@
 
     --color-card: var(--card);
     --color-card-foreground: var(--card-foreground);
+
+    --color-db: var(--db);
+    --color-db-foreground: var(--db-foreground);
+
+    --color-lb: var(--lb);
+    --color-lb-foreground: var(--lb-foreground);
 
     --color-popover: var(--popover);
     --color-popover-foreground: var(--popover-foreground);
@@ -68,6 +75,7 @@
   color utility to any element that depends on these defaults.
 */
 @layer base {
+
     *,
     ::after,
     ::before,
@@ -82,6 +90,10 @@
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
+    --db: #2A3D66;
+    --db-foreground:#2A3D66;
+    --lb: #5A8AF2;
+    --lb-foreground:#5A8AF2;
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
     --primary: oklch(0.205 0 0);
