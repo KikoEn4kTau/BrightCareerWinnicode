@@ -34,10 +34,12 @@ export default function Register() {
     return (
         <AuthLayout title="Buat Akun" description="Isi Data Berikut Untuk Membuat Akun">
             <Head title="Register" />
-            <form className="flex flex-col gap-6" onSubmit={submit}>
-                <div className="grid gap-6 transform translate-x-[50px]">
+            <form className="flex flex-col gap-6 w-full max-w-md mx-auto px-4 sm:px-6" onSubmit={submit}>
+                <div className="grid gap-4 sm:gap-6">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Nama Lengkap</Label>
+                        <Label htmlFor="name" className="text-sm font-medium">
+                            Nama Lengkap
+                        </Label>
                         <Input
                             id="name"
                             type="text"
@@ -49,12 +51,15 @@ export default function Register() {
                             onChange={(e) => setData('name', e.target.value)}
                             disabled={processing}
                             placeholder="Nama Lengkap"
+                            className="w-full"
                         />
-                        <InputError message={errors.name} className="mt-2" />
+                        <InputError message={errors.name} className="mt-1" />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="email" className="text-sm font-medium">
+                            Email
+                        </Label>
                         <Input
                             id="email"
                             type="email"
@@ -65,12 +70,15 @@ export default function Register() {
                             onChange={(e) => setData('email', e.target.value)}
                             disabled={processing}
                             placeholder="email@example.com"
+                            className="w-full"
                         />
-                        <InputError message={errors.email} />
+                        <InputError message={errors.email} className="mt-1" />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password">Password</Label>
+                        <Label htmlFor="password" className="text-sm font-medium">
+                            Password
+                        </Label>
                         <Input
                             id="password"
                             type="password"
@@ -81,12 +89,15 @@ export default function Register() {
                             onChange={(e) => setData('password', e.target.value)}
                             disabled={processing}
                             placeholder="Password"
+                            className="w-full"
                         />
-                        <InputError message={errors.password} />
+                        <InputError message={errors.password} className="mt-1" />
                     </div>
 
                     <div className="grid gap-2">
-                        <Label htmlFor="password_confirmation">Konfirmasi Password</Label>
+                        <Label htmlFor="password_confirmation" className="text-sm font-medium">
+                            Konfirmasi Password
+                        </Label>
                         <Input
                             id="password_confirmation"
                             type="password"
@@ -97,17 +108,23 @@ export default function Register() {
                             onChange={(e) => setData('password_confirmation', e.target.value)}
                             disabled={processing}
                             placeholder="Konfirmasi Password"
+                            className="w-full"
                         />
-                        <InputError message={errors.password_confirmation} />
+                        <InputError message={errors.password_confirmation} className="mt-1" />
                     </div>
 
-                    <Button type="submit" className="text-white mt-2 w-full" tabIndex={5} disabled={processing}>
+                    <Button 
+                        type="submit" 
+                        className="text-white mt-2 w-full flex items-center justify-center gap-2" 
+                        tabIndex={5} 
+                        disabled={processing}
+                    >
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
                         Daftar &rarr; 
                     </Button>
                 </div>
 
-                <div className="text-db-foreground text-center text-sm transform translate-x-[130px]">
+                <div className="text-db-foreground text-center text-sm">
                     Sudah Memiliki Akun?{' '}
                     <TextLink href={route('login')} tabIndex={6}>
                         Masuk

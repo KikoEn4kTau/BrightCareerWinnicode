@@ -10,10 +10,10 @@ interface AuthLayoutProps {
 
 export default function AuthSimpleLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
     return (
-        <div className="bg-white flex min-h-svh flex-col items-start  justify-start gap-6 p-6 md:p-10">
-            <div className="w-full max-w-sm">
+        <div className="bg-white flex min-h-screen flex items-start  justify-start gap-6 p-6 md:p-10">
+            <div className="w-full max-w-md">
                 <div className="flex flex-col gap-8">
-                    <div className="w-[620px] h-full absolute left-[918px] absolute top-[0px] ">
+                    <div className="hidden lg:block lg:fixed lg:right-0 lg:top-0 lg:w-1/2 lg:h-screen xl:w-[620px]">
                         <img src="Auth.svg" alt="Auth Image"></img>
                     </div>
                     <div className="flex flex-col items-start gap-4">
