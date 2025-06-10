@@ -1,4 +1,4 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Dashboard() {
     return (
@@ -18,6 +18,12 @@ export default function Dashboard() {
                     </Link>
                     <Link className="text-base text-db font-semibold hover:text-lb/90 fixed top-[24px] left-[575px]" href="/profil">
                         Komunitas
+                    </Link>
+                    <Link
+                        href='/settings/profile'
+                        className="rounded-xl border border-3 border-db px-5 py-1.5 fixed top-[17px] right-[50px] text-db font-semibold hover:bg-db hover:text-white transition-colors duration-200"
+                    >
+                         Profil
                     </Link>
                 </nav>
             </header>
