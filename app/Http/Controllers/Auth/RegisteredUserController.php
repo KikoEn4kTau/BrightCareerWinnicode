@@ -31,21 +31,54 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
+            'user_type' => 'required|in:pekerja,perusahaan',
+            'role' => 'required|in:pekerja,perusahaan',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = null; // Inisialisasi variabel $user
 
-        event(new Registered($user));
+        if ($request->role === 'pekerja') {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:users,email',
+            ]);
 
-        Auth::login($user);
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'user_type' => 'pekerja',
+                'role' => 'pekerja',
+            ]);
 
-        return to_route('dashboard');
+        } elseif ($request->role === 'perusahaan') {
+            $request->validate([
+                'company_name' => 'required|string|max:255',
+                'company_email' => 'required|email|max:255|unique:users,company_email',
+                'company_phone' => 'nullable|string|max:20', // Tambahkan validasi untuk phone jika diperlukan
+            ]);
+
+            $user = User::create([
+                'name' => $request->company_name,
+                'email' => $request->company_email,
+                'password' => Hash::make($request->password),
+                'phone' => $request->company_phone,
+                'user_type' => 'perusahaan',
+                'role' => 'perusahaan',
+            ]);
+        }
+
+        // Pastikan $user sudah terdefinisi sebelum digunakan
+        if ($user) {
+            event(new Registered($user));
+            Auth::login($user);
+        }
+        if ($user->role === 'pekerja') {
+            return to_route('home');
+        }
+        else{
+            return to_route('company');
+        }
     }
 }

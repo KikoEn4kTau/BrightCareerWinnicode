@@ -41,3 +41,39 @@ export interface User {
     updated_at: string;
     [key: string]: unknown; // This allows for additional properties...
 }
+
+// Job related interfaces
+export interface Job {
+    id: number;
+    position: string;
+    salary: string;
+    type: 'WFH' | 'Onsite' | 'Hybrid';
+    status: string;
+    company: string;
+    city: string;
+    created_at: string;
+}
+
+export interface JobFormData extends Record<string, string> {
+    judul: string;
+    deskripsi: string;
+    kualifikasi: string;
+    perusahaan: string;
+    kota: string;
+    tipe: string;
+    tenure: string;
+    gajiMinimum: string;
+    gajiMaksimum: string;
+    urlLogo: string;
+    status: string;
+}
+
+// Page props with flash messages
+export interface PageProps {
+    auth: Auth;
+    flash?: {
+        success?: string;
+        error?: string;
+    };
+    [key: string]: any;
+}

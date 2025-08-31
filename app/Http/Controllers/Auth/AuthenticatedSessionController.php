@@ -32,8 +32,13 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+        
+        if ($user->user_type === 'pekerja') {
+            return to_route('home');
+        } else{
+            return to_route('company');
+        }
     }
 
     /**
@@ -42,7 +47,7 @@ class AuthenticatedSessionController extends Controller
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();
-
+        $request->session()->flush();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 

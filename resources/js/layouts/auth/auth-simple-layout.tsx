@@ -8,7 +8,7 @@ interface AuthLayoutProps {
     description?: string;
 }
 
-export default function AuthSimpleLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
+export default function     AuthSimpleLayout({ children, title, description }: PropsWithChildren<AuthLayoutProps>) {
     return (
         <div className="bg-white flex min-h-screen flex items-start  justify-start gap-6 p-6 md:p-10">
             <div className="w-full max-w-md">

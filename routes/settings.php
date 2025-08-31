@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 Route::middleware('auth')->group(function () {
+    Route::get('settings', fn () => redirect()->route('profile.edit'))->name('settings');
+    Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -25,6 +25,7 @@ type RegisterForm = {
     company_phone?: string;
     business_field?: string;
     company_address?: string;
+    role: 'pekerja' | 'perusahaan';
 };
 
 export default function Register() {
@@ -43,19 +44,23 @@ export default function Register() {
         company_phone: '',
         business_field: '',
         company_address: '',
+        role: userType ,
     });
 
     const handleUserTypeChange = (type: 'pekerja' | 'perusahaan') => {
         setUserType(type);
         setData('user_type', type);
+        setData('role', type)
     };
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
-        post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
-        });
-    };
+   const submit: FormEventHandler = (e) => {
+    e.preventDefault();
+    console.log(data);
+    post(route('register'),{
+        onFinish: () => reset('password', 'password_confirmation'),
+    });
+};
+
 
     return (
         <AuthLayout title="Buat Akun" description="Isi Data Berikut Untuk Membuat Akun">
@@ -148,20 +153,6 @@ export default function Register() {
                                         className="w-full"
                                     />
                                     <InputError message={errors.phone} className="mt-1" />
-                                </div>
-
-                                <div className="grid gap-2">
-                                    <Input
-                                        id="skills"
-                                        type="text"
-                                        tabIndex={4}
-                                        value={data.skills}
-                                        onChange={(e) => setData('skills', e.target.value)}
-                                        disabled={processing}
-                                        placeholder="Keahlian (contoh: Web Developer, Designer)"
-                                        className="w-full"
-                                    />
-                                    <InputError message={errors.skills} className="mt-1" />
                                 </div>
                             </>
                         )}
